@@ -40,6 +40,8 @@ public class QuizCreateHandler {
     if (messageText.startsWith("/")) {
       switch (messageText) {
         case BotConstants.CANCEL_CREATE_QUIZ_COMMAND -> {
+          bot.execute(new SendMessage(userId, "You canceled create quiz." +
+                  "\nInput " + BotConstants.CHOOSE_TOPIC_COMMAND + "for choice quiz"));
           quizBuilder = new QuizBuilder();
           users.get(userId).setCreateMode(false);
         }
@@ -49,50 +51,63 @@ public class QuizCreateHandler {
             bot.execute(new SendMessage(userId, "Please add options to your question"));
             break;
           }
-          bot.execute(new SendMessage(userId, "input answer description "
-                  + BotConstants.CREATE_QUIZ_COMMAND + " for create your quiz"));
+          bot.execute(new SendMessage(userId, "Input answer description "
+                  + BotConstants.CREATE_QUIZ_COMMAND + " for create your quiz or /not_description " +
+                  "if you not want answer description"));
           Collections.shuffle(lastQuestion.getOptionList());
           quizBuilder.setInputOptions(false);
           quizBuilder.setInputAnswerDescription(true);
           break;
         }
         case BotConstants.CREATE_QUIZ_COMMAND -> {
-          if (questionListSize == 0 ) {
-            bot.execute(new SendMessage(userId, "Please add questions to your quiz"));
-            break;
-          }
           if(quizBuilder.isInputOptions()){
             bot.execute(new SendMessage(userId, "Please finish input option for question"));
             break;
           }
+          if (questionListSize <= 2 ) {
+            bot.execute(new SendMessage(userId, "Please input question to your quiz"));
+            break;
+          }
           Collections.shuffle(questionList);
+          users.get(userId).setCreateMode(false);
           daoRepository.addNewQuiz(new Quiz(quizBuilder.getTopicName(), questionList));
+          bot.execute(new SendMessage(userId, "Input "+ BotConstants.CHOOSE_TOPIC_COMMAND
+                  + " for choice quiz"));
+        }
+        case "/not_description" -> {
+          quizBuilder.setInputAnswerDescription(false);
+          quizBuilder.getQuestionList().get(questionListSize - 1).setAnswerDescription(" ");
+          bot.execute(new SendMessage(userId, "Input new question or input "
+                  + BotConstants.CREATE_QUIZ_COMMAND + " for create your quiz"));
+          return;
         }
       }
       return;
     }
 
     if(quizBuilder.isInputAnswerDescription()){
-      createAnswerDescription(userId, messageText, questionList, questionListSize);
+      createAnswerDescription(userId, messageText, questionList);
       return;
     }
 
     if(quizBuilder.isInputOptions()) {
-      createQuestionOption(userId, messageText, questionList, questionListSize);
+      createQuestionOption(userId, messageText, questionList);
     } else {
       createQuestion(userId, messageText, questionList);
     }
   }
 
-  private void createQuestionOption(Long userId, String messageText, List<Question> questionList, int questionListSize) {
+  private void createQuestionOption(Long userId, String messageText,
+                                    List<Question> questionList) {
+    int questionListSize = questionList.size();
     List<QuestionOption> questionOptionList = questionList.get(questionListSize - 1).getOptionList();
     if (quizBuilder.isInputAnswerOptions()) {
       questionOptionList.add(new QuestionOption(true, messageText));
-      bot.execute(new SendMessage(userId, "Write new options or write /done for finish input options"));
+      bot.execute(new SendMessage(userId, "Input option or write /done for finish input options"));
       quizBuilder.setInputAnswerOptions(false);
       return;
     }
-    bot.execute(new SendMessage(userId, "Write new options or write /done for finish input options"));
+    bot.execute(new SendMessage(userId, "Input new option or write /done for finish input options"));
     questionOptionList.add(new QuestionOption(false, messageText));
   }
 
@@ -101,14 +116,16 @@ public class QuizCreateHandler {
     question.setQuestion(messageText);
     questionList.add(question);
     question.setOptionList(new ArrayList<>());
-    bot.execute(new SendMessage(userId, "Write answer options"));
+    bot.execute(new SendMessage(userId, "Input answer options"));
     quizBuilder.setInputAnswerOptions(true);
     quizBuilder.setInputOptions(true);
   }
 
-  private void createAnswerDescription(Long userId, String messageText, List<Question> questionList, int questionListSize) {
+  private void createAnswerDescription(Long userId, String messageText,
+                                       List<Question> questionList) {
+    int questionListSize = questionList.size();
     questionList.get(questionListSize - 1).setAnswerDescription(messageText);
-    bot.execute(new SendMessage(userId, "input new question or input "
+    bot.execute(new SendMessage(userId, "Input new question or input "
             + BotConstants.CREATE_QUIZ_COMMAND + " for create your quiz"));
     quizBuilder.setInputAnswerDescription(false);
   }

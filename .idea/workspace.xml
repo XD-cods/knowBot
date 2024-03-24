@@ -5,19 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3303dbdc-6474-4dbc-aaae-5f9d00046943" name="Changes" comment="Refactoring handleCallback">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/DAO/UserInfoDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/QuizBuilder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/QuizCreateHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/BotConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/BotConstants.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/BotUpdate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/BotUpdate.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/DAO/QuizDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/DAO/QuizDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/QuizRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/DAORepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/Question.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Question.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/DAORepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/DAORepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/QuizCreateHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/QuizCreateHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/UserInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/UserInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/UserQuizSession.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/UserQuizSession.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

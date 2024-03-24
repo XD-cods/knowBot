@@ -26,9 +26,10 @@ public class QuizDAO {
 
   public Quiz getByTopicName(String topicName) {
     try (Session session = sessionFactory.openSession()) {
-      Query<Quiz> query = session.createQuery("select topicName from Quiz where topicName = :topicName", Quiz.class);
+      Query<Quiz> query = session.createQuery("from Quiz where topicName = :topicName", Quiz.class);
       query.setParameter("topicName", topicName);
       Quiz quiz = query.getSingleResult();
+      System.out.println(quiz.toString());
       if (quiz == null) {
         return new Quiz();
       }

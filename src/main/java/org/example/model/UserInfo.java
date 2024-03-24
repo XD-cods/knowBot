@@ -9,7 +9,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import org.hibernate.annotations.NotFound;
 
 @Entity
 @Table(name = "user_info")
@@ -26,7 +25,7 @@ public class UserInfo {
   private boolean createMode = false;
   private UserQuizSession userQuizSession = null;
   private String currentTopicName;
-  private Message lastBotMessage = null;
+  private Message lastkeyboardBotMessage = null;
 
   public UserInfo() {
   }
@@ -61,12 +60,12 @@ public class UserInfo {
     this.userQuizSession = userQuizSession;
   }
 
-  public Message getLastBotMessage() {
-    return lastBotMessage;
+  public Message getLastkeyboardBotMessage() {
+    return lastkeyboardBotMessage;
   }
 
-  public void setLastBotMessage(Message lastBotMessage) {
-    this.lastBotMessage = lastBotMessage;
+  public void setLastkeyboardBotMessage(Message lastkeyboardBotMessage) {
+    this.lastkeyboardBotMessage = lastkeyboardBotMessage;
   }
 
   public int getId() {
